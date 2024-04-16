@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Room Demo</string>
+    <string name="message">Clicca per leggere</string>
+    <string name="title">Proverebi a caso</string>
+</resources>

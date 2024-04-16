@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Room Demo</string>
+    <string name="message">Click here to read</string>
+    <string name="title">"Random proverbs"</string>
+</resources>
