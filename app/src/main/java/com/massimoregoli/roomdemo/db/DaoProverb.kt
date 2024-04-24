@@ -13,6 +13,13 @@ interface DaoProverb {
     fun update(proverb: Proverb)
     @Delete
     fun delete(proverb: Proverb)
+
+    @Query("""SELECT text FROM Proverb 
+        WHERE text like :filter
+        """
+            )
+    fun readALl(filter:String): List<String>
+
     @Query(
         """
         SELECT * FROM Proverb

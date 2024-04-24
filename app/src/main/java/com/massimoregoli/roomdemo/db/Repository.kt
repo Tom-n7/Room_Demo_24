@@ -5,6 +5,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Repository(private val dao: DaoProverb) {
+
+    fun readAll(s:String): List<String> {
+        return dao.readALl(s)
+    }
+
     fun readNext(favorite: Int): Proverb? {
         return dao.loadRandomProverb(favorite)
     }
