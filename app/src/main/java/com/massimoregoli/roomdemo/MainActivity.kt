@@ -171,22 +171,12 @@ class MainActivity : ComponentActivity() {
         val focusManager = LocalFocusManager.current
         Column {
             FilterMe(filter, onclick)
-            Button(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            MyButton(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                 onClick = {
                     keyboardController?.hide()
                     focusManager.clearFocus()
                     onclick(filter.value)
-                }) {
-                Text(
-                    text = stringResource(id = R.string.message),
-                    textAlign = TextAlign.Center,
-                    fontSize = bigFontSize,
-                    fontStyle = FontStyle.Italic,
-                    color = Color.Red,
-                    lineHeight = lineHeight,
-                    fontFamily = fontFamily()
-                )
-            }
+                })
             LazyColumn {
                 items(proverbs) {
                     Proverb(
@@ -214,22 +204,12 @@ class MainActivity : ComponentActivity() {
         val focusManager = LocalFocusManager.current
         Column {
             FilterMe(filter, onclick)
-            Button(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            MyButton(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                 onClick = {
                     keyboardController?.hide()
                     focusManager.clearFocus()
                     onclick(filter.value)
-                }) {
-                Text(
-                    text = stringResource(id = R.string.message),
-                    textAlign = TextAlign.Center,
-                    fontSize = bigFontSize,
-                    fontStyle = FontStyle.Italic,
-                    color = Color.Red,
-                    lineHeight = lineHeight,
-                    fontFamily = fontFamily()
-                )
-            }
+                })
             LazyHorizontalGrid(rows = GridCells.Fixed(3)) {
                 itemsIndexed(proverbs) { _, it ->
                     Proverb(
@@ -406,20 +386,10 @@ class MainActivity : ComponentActivity() {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            Button(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            MyButton(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                 onClick = {
                     onclick("")
-                }) {
-                Text(
-                    text = stringResource(id = R.string.message),
-                    textAlign = TextAlign.Center,
-                    fontSize = bigFontSize,
-                    fontStyle = FontStyle.Italic,
-                    color = Color.Red,
-                    lineHeight = lineHeight,
-                    fontFamily = fontFamily()
-                )
-            }
+                })
             LazyColumn {
                 itemsIndexed(proverbs) { index, proverb ->
                     Text(text = proverb, modifier=Modifier.fillMaxWidth().background(
@@ -432,5 +402,24 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    fun MyButton(modifier: Modifier = Modifier, onClick: () -> Unit){
+
+        Button(onClick, modifier){
+            Text(
+                text = stringResource(id = R.string.message),
+                textAlign = TextAlign.Center,
+                fontSize = bigFontSize,
+                fontStyle = FontStyle.Italic,
+                color = Color.Red,
+                lineHeight = lineHeight,
+                fontFamily = fontFamily()
+            )
+        }
+    }
+
+
+
 }
 
