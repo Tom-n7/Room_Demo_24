@@ -3,4 +3,5 @@
     <string name="app_name">Room Demo</string>
     <string name="message">Clicca per leggere</string>
     <string name="title">Proverebi a caso</string>
+    <string name="addmessage">"Aggiungi proverbio"</string>
 </resources>

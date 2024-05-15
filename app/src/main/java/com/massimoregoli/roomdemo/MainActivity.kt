@@ -33,6 +33,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -72,7 +73,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val radioOptions = listOf("Random", "Grid H", "List", "Simple")
+            val radioOptions = listOf("Random", "Grid H", "List", "Simple", "Modify")
             var proverb by rememberSaveable { mutableStateOf("") }
             var proverbs by rememberSaveable {
                 mutableStateOf(listOf<String>())
@@ -152,6 +153,14 @@ class MainActivity : ComponentActivity() {
                                         proverbs = l
                                     }
                                 }
+                            }
+                            5 -> {
+                                ModifyWorkbanch()
+                                    //DUMMY
+
+
+
+
                             }
                         }
                     }
@@ -392,23 +401,25 @@ class MainActivity : ComponentActivity() {
                 })
             LazyColumn {
                 itemsIndexed(proverbs) { index, proverb ->
-                    Text(text = proverb, modifier=Modifier.fillMaxWidth().background(
-                        if (index % 2 == 0)
-                            Color.White
-                        else
-                            Color.LightGray
-                    ))
+                    Text(text = proverb, modifier= Modifier
+                        .fillMaxWidth()
+                        .background(
+                            if (index % 2 == 0)
+                                Color.White
+                            else
+                                Color.LightGray
+                        ))
                 }
             }
         }
     }
 
     @Composable
-    fun MyButton(modifier: Modifier = Modifier, onClick: () -> Unit){
+    fun MyButton(modifier: Modifier = Modifier,text: String = stringResource(id = R.string.message) , onClick: () -> Unit){
 
         Button(onClick, modifier){
             Text(
-                text = stringResource(id = R.string.message),
+                text = text,
                 textAlign = TextAlign.Center,
                 fontSize = bigFontSize,
                 fontStyle = FontStyle.Italic,
@@ -418,6 +429,29 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
+
+    @Composable
+    fun ModifyWorkbanch(){
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            MyButton(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+                text = stringResource(id = R.string.addmessage),
+                onClick = {})
+
+            Text(text = "Scrivi il proverbio che vuoi aggiungere")
+// questo deve essere un textfield, da qui bisogna acquisire la stringa che insieme ad altre info inserite
+// dall'utente per creare il proverbio
+
+        }
+
+
+
+
+
+
+    }
+
 
 
 
