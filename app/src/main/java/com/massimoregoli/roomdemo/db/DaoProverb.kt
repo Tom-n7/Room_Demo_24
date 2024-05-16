@@ -7,7 +7,7 @@ import androidx.room.*
 interface DaoProverb {
     @Insert
     fun insertAll(proverbs: List<Proverb>)
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(proverb: Proverb)
     @Update
     fun update(proverb: Proverb)

@@ -3,4 +3,5 @@
     <string name="message">Click here to read</string>
     <string name="title">"Random proverbs"</string>
     <string name="addmessage">"Add proverb"</string>
+    <string name="completeins">"Completed insertion!</string>
 </resources>

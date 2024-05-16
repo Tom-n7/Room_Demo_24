@@ -155,8 +155,16 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                             5 -> {
-                                ModifyWorkbanch()
-                                    //DUMMY
+                                ModifyWorkbanch(){
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        var newProverb = Proverb(s = it )
+
+
+
+                                        repository.update()
+                                    }
+
+                                }
 
 
 
@@ -425,23 +433,47 @@ class MainActivity : ComponentActivity() {
                 fontStyle = FontStyle.Italic,
                 color = Color.Red,
                 lineHeight = lineHeight,
+
                 fontFamily = fontFamily()
             )
         }
     }
 
+    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
-    fun ModifyWorkbanch(){
+    fun ModifyWorkbanch(onClick: (String) -> Unit){
+
+
+        val keyboardController = LocalSoftwareKeyboardController.current            //variabili per gestire tastiera virtuale e focus
+        val focusManager = LocalFocusManager.current
+        var newProverbText  by rememberSaveable {
+            mutableStateOf("")
+        }
+
         Column(
             modifier = Modifier.fillMaxSize()
-        ) {
+        )
+        {
+
             MyButton(modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                 text = stringResource(id = R.string.addmessage),
-                onClick = {})
+                onClick = {
+                    keyboardController?.hide()
+                    focusManager.clearFocus()
+                    onClick(newProverbText)
+                }
+            )
 
-            Text(text = "Scrivi il proverbio che vuoi aggiungere")
-// questo deve essere un textfield, da qui bisogna acquisire la stringa che insieme ad altre info inserite
-// dall'utente per creare il proverbio
+            TextField(value = newProverbText,
+                    onValueChange = {
+                        newProverbText = it
+                    },
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .padding(vertical = 10.dp),
+                placeholder = { Text( text =  stringResource(id = R.string.addmessage))}
+            )
+
 
         }
 
