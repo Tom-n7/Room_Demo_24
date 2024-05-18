@@ -57,6 +57,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.massimoregoli.roomdemo.db.DbProverb
+import com.massimoregoli.roomdemo.db.Proverb
 import com.massimoregoli.roomdemo.db.Repository
 import com.massimoregoli.roomdemo.ui.theme.RoomDemoTheme
 import com.massimoregoli.roomdemo.ui.theme.bigFontSize
@@ -81,9 +82,9 @@ class MainActivity : ComponentActivity() {
             var screen by rememberSaveable {
                 mutableStateOf(4)
             }
-            val context = LocalContext.current
-            val db = DbProverb.getInstance(context)
-            val repository = Repository(db.proverbDao())
+            var context = LocalContext.current
+            var db = DbProverb.getInstance(context)
+            var repository = Repository(db.proverbDao())
             RoomDemoTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -156,13 +157,15 @@ class MainActivity : ComponentActivity() {
                             }
                             5 -> {
                                 ModifyWorkbanch(){
+                                    val newProverb = Proverb(it)
                                     CoroutineScope(Dispatchers.IO).launch {
-                                        var newProverb = Proverb(s = it )
+                                        repository.insert(newProverb)
 
-
-
-                                        repository.update()
                                     }
+
+                                    repository = Repository(db.proverbDao())
+                                    db = DbProverb.getInstance(context)
+
 
                                 }
 

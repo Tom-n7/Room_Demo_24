@@ -18,9 +18,11 @@ class Repository(private val dao: DaoProverb) {
         return dao.readFilteredNext(filter, favorite)
     }
 
-    fun update(proverb: Proverb) {
+    fun insert(newProverb: Proverb)  {
         CoroutineScope(Dispatchers.IO).launch {
-            dao.update(proverb)
+            dao.update(newProverb)
         }
     }
+
+
 }
